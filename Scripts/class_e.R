@@ -1,3 +1,18 @@
+#BEFORE STARTING OUR CLASS, PLEASE RUN THIS SNIPPET TO INSTALL/LOAD OUR LIBRARIES NEEDED FOR THIS LESSON
+
+packages_needed <- c('MASS','tolerance')
+for (package_name in packages_needed) {      
+  if (!(package_name %in% rownames(installed.packages()))){
+    install.packages(package_name)
+  }
+}
+for (i in 1:length(packages_needed))
+{
+  library(packages_needed[[i]],character.only=TRUE)
+}
+
+
+
 #load dataset
 hp <- read.csv("HPressure.csv")
 
