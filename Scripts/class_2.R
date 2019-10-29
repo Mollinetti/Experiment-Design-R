@@ -130,5 +130,5 @@ hx<- dnorm(x, mean = mean(hp$intval), sd = sd(hp$intval))
 plot(x,hx, type = "l", lty = 2, xlab = "x value", ylab = "Density")
 
 abline(v = tol$`2-sided.lower`, col = 'red') #put a vertical line at the left side of the tolerance interval
-abline(v = tol$`2-sided.upper`, col = 'red') #put a vertical line at the left side of the tolerance interval
+abline(v = tol$`2-sided.upper`, col = 'red') #put a vertical line at the right side of the tolerance interval
 
