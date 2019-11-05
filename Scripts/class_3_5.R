@@ -13,12 +13,13 @@ for (i in 1:length(packages_needed))
 
 #SLEEP EXPERIMENT
 
-x<- rnorm(23,mean=7.6,sd=1)
-y<- rnorm(23,mean=7.3,sd= 1.11)
-z<- rnorm(23,mean=7.4,sd=1.2)
+x<- rnorm(24,mean=7.6,sd=1)
+y<- rnorm(24,mean=7.3,sd= 1.11)
+z<- rnorm(24,mean=7.4,sd=1.2)
 
 df<- data.frame(x,y,z)
 colnames(df)<- c("Control", "Test", "Placebo")
+df <-as.data.frame(apply(df,2,function (x) round(x, digits = 2)))
 write.csv(df, file = 'sleep_exp_main.csv', row.names = F)
 
 
@@ -36,7 +37,7 @@ power.t.test(n = 6, delta = 1, sd = sd(sleep_pilot$Placebo), sig.level = 0.05, t
 
 #Placebo was the lowest, let's determine the sample size taking placebo into consideration
 #power t-test to determine sample size
-power.t.test(power = 0.85, delta = 1, sd = sd(sleep_pilot$Placebo), sig.level = 0.05, type = "one.sample") 
+power.t.test(power = 0.85, delta = 1, sd = sd(sleep_pilot$Control), sig.level = 0.05, type = "one.sample") 
 
 
 #load the sleep_main
@@ -68,7 +69,7 @@ res_shapiro[['Placebo']]
 #fligner kileen test
 fligner.test(sleep_main)
 
-#plot our residuals
+#plot of our residuals
 resids <- apply(sleep_main, 1, function (x) (x- mean(x)))
 resids <- list("Test" = resids[1,], "Control" = resids[2,], "Placebo" = resids[3,] )
 
@@ -88,15 +89,13 @@ durbinWatsonTest(lm(sleep_main$Control + sleep_main$Test + sleep_main$Placebo ~1
 
 #correlation and covariance
 cor(sleep_main)
-
 cov(sleep_main)
 
 #t-test based on our decision
-
-#pooled t-test
-t.test(sleep_main$Control, sleep_main$Test, var.equal = TRUE, conf.level = 0.95)
-t.test(sleep_main$Control, sleep_main$Placebo, var.equal = TRUE, conf.level = 0.95)
-t.test(sleep_main$Test, sleep_main$Placebo, var.equal = TRUE, conf.level = 0.95)
+#paired t-test
+t.test(sleep_main$Control, sleep_main$Test, var.equal = TRUE, paired = TRUE, conf.level = 0.95)
+t.test(sleep_main$Control, sleep_main$Placebo, var.equal = TRUE, paired = TRUE, conf.level = 0.95)
+t.test(sleep_main$Test, sleep_main$Placebo, var.equal = TRUE, paired = TRUE, conf.level = 0.95)
 
 
 
