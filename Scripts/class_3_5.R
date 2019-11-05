@@ -13,16 +13,6 @@ for (i in 1:length(packages_needed))
 
 #SLEEP EXPERIMENT
 
-x<- rnorm(24,mean=7.6,sd=1)
-y<- rnorm(24,mean=7.3,sd= 1.11)
-z<- rnorm(24,mean=7.4,sd=1.2)
-
-df<- data.frame(x,y,z)
-colnames(df)<- c("Control", "Test", "Placebo")
-df <-as.data.frame(apply(df,2,function (x) round(x, digits = 2)))
-write.csv(df, file = 'sleep_exp_main.csv', row.names = F)
-
-
 #variables
 conf_alpha<- 0.95
 power_beta<- 0.85
