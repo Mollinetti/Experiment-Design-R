@@ -1,0 +1,31 @@
+# Source: 
+# The number of suicides per year: Health, labour and Welfare Ministry,"Demographic Survey"			
+# Unemployment rateÅFStatistic Bureau, Ministry of Internal Affairs and Communications, "Labor Force Survey"			
+# real GDP: IMF-World Economic Outlook Databases			
+# suicide: the number of suicides per year (in Japan)
+# unemployment: unemployment rate (%) (in Japan)
+# realgdp: percentage change of real GDP (%) (in Japan)
+year	suicide  unemployment  realgdp
+1981	20096     2.208	      4.092
+1982	20668	  2.350	      3.321
+1983	24985	  2.658	      3.015
+1984	24344	  2.708	      4.367
+1985	23383	  2.617	      6.141
+1986	25667	  2.758	      2.792
+1987	23831	  2.850	      4.025
+1988	22795	  2.533	      6.903
+1989	21125	  2.267	      5.231
+1990	20088	  2.108	      5.423
+1991	19875	  2.100	      3.270
+1992	20893	  2.150	      0.816
+1993	20516	  2.500	      0.171
+1994	20923	  2.892	      0.860
+1995	21420	  3.150	      1.924
+1996	22138	  3.350	      2.577
+1997	23494	  3.400	      1.583
+1998	31755	  4.108	      -2.023
+1999	31413	  4.683	      -0.200
+2000	30251	  4.717	      2.232
+2001	29375	  5.033	      0.355
+2002	29949	  5.375	      0.289
+2003	32109	  5.258	      1.671
