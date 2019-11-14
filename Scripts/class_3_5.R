@@ -25,7 +25,7 @@ power.t.test(n = 6, delta = 1, sd = sd(sleep_pilot$Control), sig.level = 0.05, t
 power.t.test(n = 6, delta = 1, sd = sd(sleep_pilot$Test), sig.level = 0.05, type = "one.sample")
 power.t.test(n = 6, delta = 1, sd = sd(sleep_pilot$Placebo), sig.level = 0.05, type = "one.sample")
 
-#Placebo was the lowest, let's determine the sample size taking placebo into consideration
+#Control was the lowest, let's determine the sample size taking placebo into consideration
 #power t-test to determine sample size
 power.t.test(power = 0.85, delta = 1, sd = sd(sleep_pilot$Control), sig.level = 0.05, type = "one.sample") 
 
@@ -48,7 +48,7 @@ qqPlot(sleep_main$Placebo, cex=1.5,pch=16, las=1)
 #list of results
 res_shapiro <- list("Control" = NULL, "Test" = NULL, "Placebo" = NULL)
 for(c in colnames(sleep_main)){
-  res_shapiro[[c]] <- shapiro.test(df[[c]])
+  res_shapiro[[c]] <- shapiro.test(sleep_main[[c]])
 }
 
 res_shapiro[['Control']]
