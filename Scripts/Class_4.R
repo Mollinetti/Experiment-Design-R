@@ -83,6 +83,13 @@ fligner.test(m.assim_hemo$Bloodlv~m.assim_hemo$Group, data = m.assim_hemo)
 
 aov.unbalanced <- aov(m.assim_hemo$Bloodlv~m.assim_hemo$Group, data = m.assim_hemo)
 
+#normality
+residuals <- resid(aov.unbalanced)
+shapiro.test(residuals)
+
+#histogram of the residuals
+hist(residuals, las = 1)
+
 summary(aov.unbalanced)
 
 #tukey post hoc
