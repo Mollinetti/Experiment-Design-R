@@ -93,8 +93,7 @@ pwr.f2.test(u = 2, v = 7, f2 = 0.6389/ (1-0.6389), sig.level = 0.05)
 ###################################################################################################
 ###################################################################################################
 
-#THE DATASET THAT WE'LL USE IS THE INSECT SPRAYS DATASETS AND IT'S ALREADY BUILT IN THE CAR
-#LIBRARY
+#THE DATASET THAT WE'LL USE IS THE INSECT SPRAYS DATASETS AND IT'S ALREADY BUILT IN THE CAR LIBRARY
 
 
 #load the dataset
@@ -124,7 +123,21 @@ colnames(un.sprays) <- c('A','B','C','D','E','F')
 
 #any extra plot
 
-#Power Analysis!
+#Power Analysis! ()
+
+###################################################################################################
+###################################################################################################
+###################################################################################################
+###################################################################################################
+
+
+
+#BONUS ROUND! THINK YOU CAN DO THIS ANALYSIS?
+
+#data of deaths by lung cancer in the UK 
+
+
+
 
 
 
