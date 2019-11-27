@@ -1,6 +1,6 @@
 #BEFORE STARTING OUR CLASS, PLEASE RUN THIS SNIPPET TO INSTALL/LOAD OUR LIBRARIES NEEDED FOR THIS LESSON
 
-packages_needed <- c('car', 'reshape2', 'e1071', 'GGally', 'DAAG' , 'MASS', 'lmtest')
+packages_needed <- c('car', 'reshape2', 'e1071', 'GGally', 'DAAG' , 'MASS', 'lmtest', 'sandwich')
 for (package_name in packages_needed) {      
   if (!(package_name %in% rownames(installed.packages()))){
     install.packages(package_name)
@@ -43,7 +43,7 @@ boxplot(realgdp, main="Gdp", col = 'green', sub=paste("Outlier rows: ", boxplot.
 
 #looking at normality using a density plot
 
-par(mfrow=c(1, 2))  # divide graph area in 2 columns
+par(mfrow=c(1, 3))  # divide graph area in 2 columns
 
 plot(density(suicide), main="Density Plot: Suicide", ylab="Frequency", sub=paste("Skewness:", round(e1071::skewness(suicide), 2))) 
 polygon(density(suicide), col="red")
@@ -115,6 +115,7 @@ spreadLevelPlot(fit1)
 #breusch pagan test
 bptest(fit1)
 
+
 # ASSESSING COLLINEARITY
 vif(fit1) # variance inflation factors 
 sqrt(vif(fit1)) > 2 # problem?
@@ -126,7 +127,19 @@ crPlots(fit1)
 #ceresPlots(fit1)
 
 #TESTING FOR INDEPENDENCE (AUTOCORRELATED ERRORS)
-durbinWatsonTest(fit1) #positive autocorrelation
+dwtest(fit1) #positive autocorrelation / unreliable
+
+#breusch-godfrey test : H_0 test statistic is assymptotic chi-sqaured
+bgtest(fit1)
+
+#check the coefficients
+coeftest(bgtest(fit1))
+
+#truncation lag variable
+m <- floor(0.75 * nrow(hwd)^(1/3))
+
+#Calculate the corrected standard errors and coeffs based on Newey West estimator
+sqrt(diag(NeweyWest(fit2, prewhite = F, lag = m-1, adjust = T))) 
 
 
 #-------------------------------------------------------------------------------------------------------------------
@@ -257,7 +270,9 @@ trainingData <- hwd[trainingRowIndex, ]  # model training data
 testData  <- hwd[-trainingRowIndex, ]   # test data
 
 # Build the model on training data -
-lmTrainMod <- lm(suicide ~ unemployment, data=hwd)  # build the model
+lmTrainMod <- lm(suicide ~ unemployment, data=trainingData)  # build the model
+
+#predicting the model on the train data
 suicidePred <- predict(lmTrainMod, testData)  # predict distance
 
 #look at the model
@@ -281,7 +296,11 @@ mape <- mean(abs((actuals_preds$predicteds - actuals_preds$actuals))/actuals_pre
 mape
 
 #K-fold Cross Validation
-cvResults <- suppressWarnings(CVlm(data  = hwd, form.lm=suicide ~ unemployment, m=7, dots=FALSE, seed=1, legend.pos="topleft",  printit=FALSE, main="Fitted Values of K-fold CV")) # performs the CV
+cvResults <- suppressWarnings(CVlm(data  = hwd, form.lm=suicide ~ unemployment, m=7, 
+dots=FALSE, seed=1, legend.pos="topleft",  printit=FALSE, main="Fitted Values of K-fold CV")) # performs the CV
+
+
+
 attr(cvResults, 'ms')  # => 251.2783 mean squared error
 
 
