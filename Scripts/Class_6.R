@@ -147,7 +147,7 @@ sqrt(vif(multi.fit1)) > 2 # problem? cutoff is 5 or 10
 # component + residual plot 
 crPlots(multi.fit1)
 # Ceres plots (for multivariate) 
-#ceresPlots(fit1)
+ceresPlots(multi.fit1)
 
 #TESTING FOR INDEPENDENCE (AUTOCORRELATED ERRORS)
 

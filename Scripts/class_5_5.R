@@ -91,7 +91,7 @@ summary(lm(medv~lstat*age,data = Boston))
 
 #Non-linear transformations of the predictors
 
-lm.fit = lm(medv~lstat)
+lm.fit1 = lm(medv~lstat)
 summary(lm.fit1)
 plot(lm.fit1)
 
