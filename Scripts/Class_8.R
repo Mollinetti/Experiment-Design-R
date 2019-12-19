@@ -1,6 +1,6 @@
 #BEFORE STARTING OUR CLASS, PLEASE RUN THIS SNIPPET TO INSTALL/LOAD OUR LIBRARIES NEEDED FOR THIS LESSON
 
-packages_needed <- c('car', 'MASS', 'HSAUR',  'reshape2', 'mvnormtest', 'mvoutlier')
+packages_needed <- c('car', 'MASS', 'heplots', 'reshape2', 'mvnormtest', 'mvoutlier')
 for (package_name in packages_needed) {      
   if (!(package_name %in% rownames(installed.packages()))){
     install.packages(package_name)
@@ -99,6 +99,11 @@ outliers <- aq.plot(skulls[,2:5])
 #against the empirical distribution function
 outliers # show list of outliers
 
+#new dataset with removed outliers
+skulls2 <- skulls[c(-34,-78,-4,-149),]
+#outlier test for new dataset
+outliers <- aq.plot(skulls2[,2:5])
+outliers
 
 #normality
 mshapiro.test(t(data.matrix(skulls[,2:5])))
